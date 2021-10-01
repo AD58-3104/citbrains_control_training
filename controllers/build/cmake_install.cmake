@@ -62,7 +62,7 @@ file(INSTALL DESTINATION "/home/satoshi/citbrains_control_training/controllers" 
      NOT IS_SYMLINK "$ENV{DESTDIR}/home/satoshi/citbrains_control_training/controllers/URe_controller")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}/home/satoshi/citbrains_control_training/controllers/URe_controller"
-         OLD_RPATH "/usr/local/lib:"
+         OLD_RPATH "/usr/local/webots/lib/controller:/usr/local/lib:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/home/satoshi/citbrains_control_training/controllers/URe_controller")

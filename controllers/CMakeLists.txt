@@ -14,8 +14,9 @@ else()
 #TODO ここは恐らくwinと分けるべき
 endif()
 
-
 protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ure.proto)
+link_directories(${WEBOTS_HOME}/lib/controller)
+
 add_executable(URe_controller ure_controller.cpp sUDPSocket.hpp ${PROTO_SRCS} ${PROTO_HDRS})
 target_compile_features(URe_controller  PUBLIC cxx_std_17)
 target_compile_options(URe_controller  PUBLIC -Wall -pedantic-errors) 
@@ -26,12 +27,11 @@ ${Protobuf_INCLUDE_DIRS}
 ${CMAKE_CURRENT_BINARY_DIR}
 ${Boost_INCLUDE_DIRS}
 )
-link_directories(${WEBOTS_HOME}/lib/controller)
-# set (WEBOTS_LIBRARIES Controller CppController) 良く分からんけどこの2行はいらないみたい
-# set (WEBOTS_LIBRARIES ${CMAKE_SHARED_LIBRARY_PREFIX}Controller${CMAKE_SHARED_LIBRARY_SUFFIX} ${CMAKE_SHARED_LIBRARY_PREFIX}CppController${CMAKE_SHARED_LIBRARY_SUFFIX})
+
+set (WEBOTS_LIBRARIES ${CMAKE_SHARED_LIBRARY_PREFIX}Controller${CMAKE_SHARED_LIBRARY_SUFFIX} ${CMAKE_SHARED_LIBRARY_PREFIX}CppController${CMAKE_SHARED_LIBRARY_SUFFIX})
 target_link_libraries(URe_controller 
     ${Boost_LIBRARIES} 
-    # ${WEBOTS_LIBRARIES}
+    ${WEBOTS_LIBRARIES}
     -lrt 
     protobuf::libprotobuf
     )

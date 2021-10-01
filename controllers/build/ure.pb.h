@@ -30,6 +30,7 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
@@ -68,6 +69,92 @@ template<> ::UreMessage::SensorData* Arena::CreateMaybeMessage<::UreMessage::Sen
 PROTOBUF_NAMESPACE_CLOSE
 namespace UreMessage {
 
+enum JointDegree_FingerNum : int {
+  JointDegree_FingerNum_palm_finger_1_joint = 1,
+  JointDegree_FingerNum_finger_1_joint_1 = 2,
+  JointDegree_FingerNum_finger_1_joint_2 = 3,
+  JointDegree_FingerNum_finger_1_joint_3 = 4,
+  JointDegree_FingerNum_palm_finger_2_joint = 5,
+  JointDegree_FingerNum_finger_2_joint_1 = 6,
+  JointDegree_FingerNum_finger_2_joint_2 = 7,
+  JointDegree_FingerNum_finger_2_joint_3 = 8,
+  JointDegree_FingerNum_finger_middle_joint_1 = 9,
+  JointDegree_FingerNum_finger_middle_joint_2 = 10,
+  JointDegree_FingerNum_finger_middle_joint_3 = 11
+};
+bool JointDegree_FingerNum_IsValid(int value);
+constexpr JointDegree_FingerNum JointDegree_FingerNum_FingerNum_MIN = JointDegree_FingerNum_palm_finger_1_joint;
+constexpr JointDegree_FingerNum JointDegree_FingerNum_FingerNum_MAX = JointDegree_FingerNum_finger_middle_joint_3;
+constexpr int JointDegree_FingerNum_FingerNum_ARRAYSIZE = JointDegree_FingerNum_FingerNum_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* JointDegree_FingerNum_descriptor();
+template<typename T>
+inline const std::string& JointDegree_FingerNum_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, JointDegree_FingerNum>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function JointDegree_FingerNum_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    JointDegree_FingerNum_descriptor(), enum_t_value);
+}
+inline bool JointDegree_FingerNum_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, JointDegree_FingerNum* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<JointDegree_FingerNum>(
+    JointDegree_FingerNum_descriptor(), name, value);
+}
+enum JointDegree_ArmNum : int {
+  JointDegree_ArmNum_shoulder_pan_joint = 0,
+  JointDegree_ArmNum_shoulder_lift_joint = 1,
+  JointDegree_ArmNum_elbow_joint = 2,
+  JointDegree_ArmNum_wrist_1_joint = 3,
+  JointDegree_ArmNum_wrist_2_joint = 4,
+  JointDegree_ArmNum_wrist_3_joint = 5
+};
+bool JointDegree_ArmNum_IsValid(int value);
+constexpr JointDegree_ArmNum JointDegree_ArmNum_ArmNum_MIN = JointDegree_ArmNum_shoulder_pan_joint;
+constexpr JointDegree_ArmNum JointDegree_ArmNum_ArmNum_MAX = JointDegree_ArmNum_wrist_3_joint;
+constexpr int JointDegree_ArmNum_ArmNum_ARRAYSIZE = JointDegree_ArmNum_ArmNum_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* JointDegree_ArmNum_descriptor();
+template<typename T>
+inline const std::string& JointDegree_ArmNum_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, JointDegree_ArmNum>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function JointDegree_ArmNum_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    JointDegree_ArmNum_descriptor(), enum_t_value);
+}
+inline bool JointDegree_ArmNum_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, JointDegree_ArmNum* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<JointDegree_ArmNum>(
+    JointDegree_ArmNum_descriptor(), name, value);
+}
+enum SensorData_SensorNum : int {
+  SensorData_SensorNum_elbow_joint_sensor = 1,
+  SensorData_SensorNum_shoulder_lift_joint_sensor = 2,
+  SensorData_SensorNum_shoulder_pan_joint_sensor = 3,
+  SensorData_SensorNum_wrist_1_joint_sensor = 4,
+  SensorData_SensorNum_wrist_2_joint_sensor = 5,
+  SensorData_SensorNum_wrist_3_joint_sensor = 6
+};
+bool SensorData_SensorNum_IsValid(int value);
+constexpr SensorData_SensorNum SensorData_SensorNum_SensorNum_MIN = SensorData_SensorNum_elbow_joint_sensor;
+constexpr SensorData_SensorNum SensorData_SensorNum_SensorNum_MAX = SensorData_SensorNum_wrist_3_joint_sensor;
+constexpr int SensorData_SensorNum_SensorNum_ARRAYSIZE = SensorData_SensorNum_SensorNum_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* SensorData_SensorNum_descriptor();
+template<typename T>
+inline const std::string& SensorData_SensorNum_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, SensorData_SensorNum>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function SensorData_SensorNum_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    SensorData_SensorNum_descriptor(), enum_t_value);
+}
+inline bool SensorData_SensorNum_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, SensorData_SensorNum* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<SensorData_SensorNum>(
+    SensorData_SensorNum_descriptor(), name, value);
+}
 // ===================================================================
 
 class JointDegree PROTOBUF_FINAL :
@@ -186,6 +273,92 @@ class JointDegree PROTOBUF_FINAL :
   public:
 
   // nested types ----------------------------------------------------
+
+  typedef JointDegree_FingerNum FingerNum;
+  static constexpr FingerNum palm_finger_1_joint =
+    JointDegree_FingerNum_palm_finger_1_joint;
+  static constexpr FingerNum finger_1_joint_1 =
+    JointDegree_FingerNum_finger_1_joint_1;
+  static constexpr FingerNum finger_1_joint_2 =
+    JointDegree_FingerNum_finger_1_joint_2;
+  static constexpr FingerNum finger_1_joint_3 =
+    JointDegree_FingerNum_finger_1_joint_3;
+  static constexpr FingerNum palm_finger_2_joint =
+    JointDegree_FingerNum_palm_finger_2_joint;
+  static constexpr FingerNum finger_2_joint_1 =
+    JointDegree_FingerNum_finger_2_joint_1;
+  static constexpr FingerNum finger_2_joint_2 =
+    JointDegree_FingerNum_finger_2_joint_2;
+  static constexpr FingerNum finger_2_joint_3 =
+    JointDegree_FingerNum_finger_2_joint_3;
+  static constexpr FingerNum finger_middle_joint_1 =
+    JointDegree_FingerNum_finger_middle_joint_1;
+  static constexpr FingerNum finger_middle_joint_2 =
+    JointDegree_FingerNum_finger_middle_joint_2;
+  static constexpr FingerNum finger_middle_joint_3 =
+    JointDegree_FingerNum_finger_middle_joint_3;
+  static inline bool FingerNum_IsValid(int value) {
+    return JointDegree_FingerNum_IsValid(value);
+  }
+  static constexpr FingerNum FingerNum_MIN =
+    JointDegree_FingerNum_FingerNum_MIN;
+  static constexpr FingerNum FingerNum_MAX =
+    JointDegree_FingerNum_FingerNum_MAX;
+  static constexpr int FingerNum_ARRAYSIZE =
+    JointDegree_FingerNum_FingerNum_ARRAYSIZE;
+  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
+  FingerNum_descriptor() {
+    return JointDegree_FingerNum_descriptor();
+  }
+  template<typename T>
+  static inline const std::string& FingerNum_Name(T enum_t_value) {
+    static_assert(::std::is_same<T, FingerNum>::value ||
+      ::std::is_integral<T>::value,
+      "Incorrect type passed to function FingerNum_Name.");
+    return JointDegree_FingerNum_Name(enum_t_value);
+  }
+  static inline bool FingerNum_Parse(::PROTOBUF_NAMESPACE_ID::ConstStringParam name,
+      FingerNum* value) {
+    return JointDegree_FingerNum_Parse(name, value);
+  }
+
+  typedef JointDegree_ArmNum ArmNum;
+  static constexpr ArmNum shoulder_pan_joint =
+    JointDegree_ArmNum_shoulder_pan_joint;
+  static constexpr ArmNum shoulder_lift_joint =
+    JointDegree_ArmNum_shoulder_lift_joint;
+  static constexpr ArmNum elbow_joint =
+    JointDegree_ArmNum_elbow_joint;
+  static constexpr ArmNum wrist_1_joint =
+    JointDegree_ArmNum_wrist_1_joint;
+  static constexpr ArmNum wrist_2_joint =
+    JointDegree_ArmNum_wrist_2_joint;
+  static constexpr ArmNum wrist_3_joint =
+    JointDegree_ArmNum_wrist_3_joint;
+  static inline bool ArmNum_IsValid(int value) {
+    return JointDegree_ArmNum_IsValid(value);
+  }
+  static constexpr ArmNum ArmNum_MIN =
+    JointDegree_ArmNum_ArmNum_MIN;
+  static constexpr ArmNum ArmNum_MAX =
+    JointDegree_ArmNum_ArmNum_MAX;
+  static constexpr int ArmNum_ARRAYSIZE =
+    JointDegree_ArmNum_ArmNum_ARRAYSIZE;
+  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
+  ArmNum_descriptor() {
+    return JointDegree_ArmNum_descriptor();
+  }
+  template<typename T>
+  static inline const std::string& ArmNum_Name(T enum_t_value) {
+    static_assert(::std::is_same<T, ArmNum>::value ||
+      ::std::is_integral<T>::value,
+      "Incorrect type passed to function ArmNum_Name.");
+    return JointDegree_ArmNum_Name(enum_t_value);
+  }
+  static inline bool ArmNum_Parse(::PROTOBUF_NAMESPACE_ID::ConstStringParam name,
+      ArmNum* value) {
+    return JointDegree_ArmNum_Parse(name, value);
+  }
 
   // accessors -------------------------------------------------------
 
@@ -367,6 +540,44 @@ class SensorData PROTOBUF_FINAL :
   public:
 
   // nested types ----------------------------------------------------
+
+  typedef SensorData_SensorNum SensorNum;
+  static constexpr SensorNum elbow_joint_sensor =
+    SensorData_SensorNum_elbow_joint_sensor;
+  static constexpr SensorNum shoulder_lift_joint_sensor =
+    SensorData_SensorNum_shoulder_lift_joint_sensor;
+  static constexpr SensorNum shoulder_pan_joint_sensor =
+    SensorData_SensorNum_shoulder_pan_joint_sensor;
+  static constexpr SensorNum wrist_1_joint_sensor =
+    SensorData_SensorNum_wrist_1_joint_sensor;
+  static constexpr SensorNum wrist_2_joint_sensor =
+    SensorData_SensorNum_wrist_2_joint_sensor;
+  static constexpr SensorNum wrist_3_joint_sensor =
+    SensorData_SensorNum_wrist_3_joint_sensor;
+  static inline bool SensorNum_IsValid(int value) {
+    return SensorData_SensorNum_IsValid(value);
+  }
+  static constexpr SensorNum SensorNum_MIN =
+    SensorData_SensorNum_SensorNum_MIN;
+  static constexpr SensorNum SensorNum_MAX =
+    SensorData_SensorNum_SensorNum_MAX;
+  static constexpr int SensorNum_ARRAYSIZE =
+    SensorData_SensorNum_SensorNum_ARRAYSIZE;
+  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
+  SensorNum_descriptor() {
+    return SensorData_SensorNum_descriptor();
+  }
+  template<typename T>
+  static inline const std::string& SensorNum_Name(T enum_t_value) {
+    static_assert(::std::is_same<T, SensorNum>::value ||
+      ::std::is_integral<T>::value,
+      "Incorrect type passed to function SensorNum_Name.");
+    return SensorData_SensorNum_Name(enum_t_value);
+  }
+  static inline bool SensorNum_Parse(::PROTOBUF_NAMESPACE_ID::ConstStringParam name,
+      SensorNum* value) {
+    return SensorData_SensorNum_Parse(name, value);
+  }
 
   // accessors -------------------------------------------------------
 
@@ -762,6 +973,26 @@ inline void SensorData::set_wrist_3(float value) {
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace UreMessage
+
+PROTOBUF_NAMESPACE_OPEN
+
+template <> struct is_proto_enum< ::UreMessage::JointDegree_FingerNum> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::UreMessage::JointDegree_FingerNum>() {
+  return ::UreMessage::JointDegree_FingerNum_descriptor();
+}
+template <> struct is_proto_enum< ::UreMessage::JointDegree_ArmNum> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::UreMessage::JointDegree_ArmNum>() {
+  return ::UreMessage::JointDegree_ArmNum_descriptor();
+}
+template <> struct is_proto_enum< ::UreMessage::SensorData_SensorNum> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::UreMessage::SensorData_SensorNum>() {
+  return ::UreMessage::SensorData_SensorNum_descriptor();
+}
+
+PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
 

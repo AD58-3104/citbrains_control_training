@@ -49,7 +49,7 @@ struct SensorDataDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT SensorDataDefaultTypeInternal _SensorData_default_instance_;
 }  // namespace UreMessage
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_ure_2eproto[2];
-static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_ure_2eproto = nullptr;
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_ure_2eproto[3];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_ure_2eproto = nullptr;
 
 const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_ure_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
@@ -89,16 +89,31 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_ure_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\ture.proto\022\nUreMessage\"B\n\013JointDegree\022\027"
-  "\n\017arm_degree_list\030\001 \003(\002\022\032\n\022finger_degree"
-  "_list\030\002 \003(\002\"{\n\nSensorData\022\r\n\005elbow\030\001 \002(\002"
-  "\022\025\n\rshoulder_lift\030\002 \002(\002\022\024\n\014shoulder_pan\030"
-  "\003 \002(\002\022\017\n\007wrist_1\030\004 \002(\002\022\017\n\007wrist_2\030\005 \002(\002\022"
-  "\017\n\007wrist_3\030\006 \002(\002"
+  "\n\ture.proto\022\nUreMessage\"\335\003\n\013JointDegree\022"
+  "\027\n\017arm_degree_list\030\001 \003(\002\022\032\n\022finger_degre"
+  "e_list\030\002 \003(\002\"\222\002\n\tFingerNum\022\027\n\023palm_finge"
+  "r_1_joint\020\001\022\024\n\020finger_1_joint_1\020\002\022\024\n\020fin"
+  "ger_1_joint_2\020\003\022\024\n\020finger_1_joint_3\020\004\022\027\n"
+  "\023palm_finger_2_joint\020\005\022\024\n\020finger_2_joint"
+  "_1\020\006\022\024\n\020finger_2_joint_2\020\007\022\024\n\020finger_2_j"
+  "oint_3\020\010\022\031\n\025finger_middle_joint_1\020\t\022\031\n\025f"
+  "inger_middle_joint_2\020\n\022\031\n\025finger_middle_"
+  "joint_3\020\013\"\203\001\n\006ArmNum\022\026\n\022shoulder_pan_joi"
+  "nt\020\000\022\027\n\023shoulder_lift_joint\020\001\022\017\n\013elbow_j"
+  "oint\020\002\022\021\n\rwrist_1_joint\020\003\022\021\n\rwrist_2_joi"
+  "nt\020\004\022\021\n\rwrist_3_joint\020\005\"\256\002\n\nSensorData\022\r"
+  "\n\005elbow\030\001 \002(\002\022\025\n\rshoulder_lift\030\002 \002(\002\022\024\n\014"
+  "shoulder_pan\030\003 \002(\002\022\017\n\007wrist_1\030\004 \002(\002\022\017\n\007w"
+  "rist_2\030\005 \002(\002\022\017\n\007wrist_3\030\006 \002(\002\"\260\001\n\tSensor"
+  "Num\022\026\n\022elbow_joint_sensor\020\001\022\036\n\032shoulder_"
+  "lift_joint_sensor\020\002\022\035\n\031shoulder_pan_join"
+  "t_sensor\020\003\022\030\n\024wrist_1_joint_sensor\020\004\022\030\n\024"
+  "wrist_2_joint_sensor\020\005\022\030\n\024wrist_3_joint_"
+  "sensor\020\006"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_ure_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_ure_2eproto = {
-  false, false, 216, descriptor_table_protodef_ure_2eproto, "ure.proto", 
+  false, false, 808, descriptor_table_protodef_ure_2eproto, "ure.proto", 
   &descriptor_table_ure_2eproto_once, nullptr, 0, 2,
   schemas, file_default_instances, TableStruct_ure_2eproto::offsets,
   file_level_metadata_ure_2eproto, file_level_enum_descriptors_ure_2eproto, file_level_service_descriptors_ure_2eproto,
@@ -112,6 +127,103 @@ descriptor_table_ure_2eproto_metadata_getter(int index) {
 // Force running AddDescriptors() at dynamic initialization time.
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY static ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptorsRunner dynamic_init_dummy_ure_2eproto(&descriptor_table_ure_2eproto);
 namespace UreMessage {
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* JointDegree_FingerNum_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_ure_2eproto);
+  return file_level_enum_descriptors_ure_2eproto[0];
+}
+bool JointDegree_FingerNum_IsValid(int value) {
+  switch (value) {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+constexpr JointDegree_FingerNum JointDegree::palm_finger_1_joint;
+constexpr JointDegree_FingerNum JointDegree::finger_1_joint_1;
+constexpr JointDegree_FingerNum JointDegree::finger_1_joint_2;
+constexpr JointDegree_FingerNum JointDegree::finger_1_joint_3;
+constexpr JointDegree_FingerNum JointDegree::palm_finger_2_joint;
+constexpr JointDegree_FingerNum JointDegree::finger_2_joint_1;
+constexpr JointDegree_FingerNum JointDegree::finger_2_joint_2;
+constexpr JointDegree_FingerNum JointDegree::finger_2_joint_3;
+constexpr JointDegree_FingerNum JointDegree::finger_middle_joint_1;
+constexpr JointDegree_FingerNum JointDegree::finger_middle_joint_2;
+constexpr JointDegree_FingerNum JointDegree::finger_middle_joint_3;
+constexpr JointDegree_FingerNum JointDegree::FingerNum_MIN;
+constexpr JointDegree_FingerNum JointDegree::FingerNum_MAX;
+constexpr int JointDegree::FingerNum_ARRAYSIZE;
+#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* JointDegree_ArmNum_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_ure_2eproto);
+  return file_level_enum_descriptors_ure_2eproto[1];
+}
+bool JointDegree_ArmNum_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+constexpr JointDegree_ArmNum JointDegree::shoulder_pan_joint;
+constexpr JointDegree_ArmNum JointDegree::shoulder_lift_joint;
+constexpr JointDegree_ArmNum JointDegree::elbow_joint;
+constexpr JointDegree_ArmNum JointDegree::wrist_1_joint;
+constexpr JointDegree_ArmNum JointDegree::wrist_2_joint;
+constexpr JointDegree_ArmNum JointDegree::wrist_3_joint;
+constexpr JointDegree_ArmNum JointDegree::ArmNum_MIN;
+constexpr JointDegree_ArmNum JointDegree::ArmNum_MAX;
+constexpr int JointDegree::ArmNum_ARRAYSIZE;
+#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* SensorData_SensorNum_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_ure_2eproto);
+  return file_level_enum_descriptors_ure_2eproto[2];
+}
+bool SensorData_SensorNum_IsValid(int value) {
+  switch (value) {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+constexpr SensorData_SensorNum SensorData::elbow_joint_sensor;
+constexpr SensorData_SensorNum SensorData::shoulder_lift_joint_sensor;
+constexpr SensorData_SensorNum SensorData::shoulder_pan_joint_sensor;
+constexpr SensorData_SensorNum SensorData::wrist_1_joint_sensor;
+constexpr SensorData_SensorNum SensorData::wrist_2_joint_sensor;
+constexpr SensorData_SensorNum SensorData::wrist_3_joint_sensor;
+constexpr SensorData_SensorNum SensorData::SensorNum_MIN;
+constexpr SensorData_SensorNum SensorData::SensorNum_MAX;
+constexpr int SensorData::SensorNum_ARRAYSIZE;
+#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
 
 // ===================================================================
 
