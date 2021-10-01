@@ -1,2 +1,2 @@
 # citbrains_control_training
-citbrains制御班の練習用リポジトリです。
+citbrains制御班の練習用リポジトリです。webotsを用いて制御関連のコードを試す事を目的としています。
