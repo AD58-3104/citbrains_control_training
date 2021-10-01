@@ -1,7 +1,0 @@
-/home/satoshi/citbrains_control_training/controllers/build/CMakeFiles/install/strip.dir
-/home/satoshi/citbrains_control_training/controllers/build/CMakeFiles/install/local.dir
-/home/satoshi/citbrains_control_training/controllers/build/CMakeFiles/install.dir
-/home/satoshi/citbrains_control_training/controllers/build/CMakeFiles/list_install_components.dir
-/home/satoshi/citbrains_control_training/controllers/build/CMakeFiles/rebuild_cache.dir
-/home/satoshi/citbrains_control_training/controllers/build/CMakeFiles/edit_cache.dir
-/home/satoshi/citbrains_control_training/controllers/build/CMakeFiles/URe_controller.dir
