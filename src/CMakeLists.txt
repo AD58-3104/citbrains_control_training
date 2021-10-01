@@ -3,7 +3,8 @@ cmake_minimum_required(VERSION 3.10)
 
 find_package(Protobuf REQUIRED)
 
-set(CONT_DIR ${CMAKE_CURRENT_SOURCE_DIR}../../controllers)
+set(CONT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../controllers/URe_controller)
+message(${CONT_DIR})
 
 find_package(Boost REQUIRED system thread )
 SET(Boost_USE_MULTITHREAD ON)

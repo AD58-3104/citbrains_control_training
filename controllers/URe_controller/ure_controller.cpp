@@ -52,14 +52,15 @@ public:
     const std::vector<std::string> finger_name_list{
         "finger_1_joint_1",
         "finger_2_joint_1",
-        "finger_middle_joint_1"
-        };
-    static const int32_t TIME_STEP = 16;
+        "finger_middle_joint_1"};
     inline static constexpr int32_t RECEIVE_PORT = 7650;
     inline static constexpr int32_t SEND_PORT = 7651;
-    UreController() : client_("127.0.0.1", SEND_PORT, Citbrains::Udpsocket::SocketMode::unicast_mode), server_(RECEIVE_PORT, std::bind(&UreController::receiveDataHandler, this, std::placeholders::_1), Citbrains::Udpsocket::SocketMode::unicast_mode)
+    UreController() : client_("127.0.0.1", SEND_PORT, Citbrains::Udpsocket::SocketMode::unicast_mode)
     {
+        std::cout << "-----------constructing now ..............." << std::endl;
         robot_ = new webots::Robot();
+        timestep_ = (int)robot_->getBasicTimeStep();
+        std::cout << "wip2\n";
         for (const auto &itr : joint_name_list)
         {
             joint_motors_.emplace_back(robot_->getMotor(itr));
@@ -68,22 +69,51 @@ public:
         {
             finger_motors_.emplace_back(robot_->getMotor(itr));
         }
-        for (const auto &itr : sensor_name_list)
+        // for (const auto &itr : sensor_name_list)
+        // {
+        //     sensors_.push_back(robot_->getPositionSensor(itr));
+        // }
+        auto handler = [this](std::string &&data)
         {
-            sensors_.push_back(robot_->getPositionSensor(itr));
-        }
+            printf("-------------------received !!--------------------");
+            std::string s(std::move(data));
+            UreMessage::JointDegree degrees;
+            degrees.ParseFromString(s);
+            {
+                std::lock_guard lock(step_mutex_);
+                int32_t cnt = 0;
+                for (const auto &deg : degrees.arm_degree_list())
+                {
+                    joint_motors_[cnt]->setPosition(deg);
+                    ++cnt;
+                }
+                for (const auto &deg : degrees.finger_degree_list())
+                {
+                    finger_motors_[cnt]->setPosition(deg);
+                    ++cnt;
+                }
+                stepOne();
+            }
+            return;
+        };
+        printf("end constructing \n");
+        server_ = std::make_unique<Citbrains::Udpsocket::UDPServer>(RECEIVE_PORT, handler, Citbrains::Udpsocket::SocketMode::unicast_mode);
+        printf("end2\n");
     }
     ~UreController()
     {
         client_.terminate();
-        server_.terminate();
+        server_->terminate();
         delete robot_;
     }
     void mainLoop()
     {
-        for (int_fast64_t loop_count = 0;; ++loop_count)
+        printf("into loop......\n");
+        for (int_fast64_t loop_count = 0;true; ++loop_count)
         {
-            std::lock_guard lock(step_mutex_);
+            if (loop_count % 10 == 0)
+                printf("loop");
+            // std::lock_guard lock(step_mutex_);
             stepOne();
         }
     }
@@ -95,14 +125,16 @@ private:
     std::vector<webots::PositionSensor *> sensors_;
     std::mutex step_mutex_;
     Citbrains::Udpsocket::UDPClient client_;
-    Citbrains::Udpsocket::UDPServer server_;
+    int32_t timestep_;
+    std::unique_ptr<Citbrains::Udpsocket::UDPServer> server_;
     void receiveDataHandler(std::string &&data)
     {
+        printf("-------------------received !!--------------------");
         std::string s(std::move(data));
         UreMessage::JointDegree degrees;
         degrees.ParseFromString(s);
         {
-            std::lock_guard lock(step_mutex_);
+            // std::lock_guard lock(step_mutex_);
             int32_t cnt = 0;
             for (const auto &deg : degrees.arm_degree_list())
             {
@@ -114,13 +146,16 @@ private:
                 finger_motors_[cnt]->setPosition(deg);
                 ++cnt;
             }
+            printf("degree received !!!!");
+            // stepOne();
         }
         return;
     }
     void stepOne()
     {
         //TODO sensorの値のやつ書く
-        robot_->step(TIME_STEP);
+        // printf("step\n");
+        robot_->step(timestep_);
     }
 };
 
