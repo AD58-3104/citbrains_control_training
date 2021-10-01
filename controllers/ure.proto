@@ -1,0 +1,37 @@
+syntax = "proto2";
+
+package UreMessage;
+
+
+message JointDegree{
+    repeated float arm_degree_list = 1;
+    repeated float finger_degree_list = 2;
+    // enum FingerNum {
+    //     UNIVERSAL = 0;
+    //     WEB = 1;
+    //     IMAGES = 2;
+    //     LOCAL = 3;
+    //     NEWS = 4;
+    //     PRODUCTS = 5;
+    //     VIDEO = 6;
+    // }
+    // enum ArmNum {
+    //     shoulder_pan_joint = 0;
+    //     shoulder_lift_joint = 1;
+    //     elbow_joint = 2;
+    //     wrist_1_joint = 3;
+    //     wrist_2_joint = 4;
+    //     wrist_3_joint = 5;
+    // }
+}
+
+
+message SensorData {
+    required float elbow = 1;
+    required float shoulder_lift = 2;
+    required float shoulder_pan = 3;
+    required float wrist_1 = 4;
+    required float wrist_2 = 5;
+    required float wrist_3 = 6;
+}
+
