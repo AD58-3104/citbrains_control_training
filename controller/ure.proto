@@ -1,0 +1,21 @@
+syntax = "proto2";
+
+package UreMessage;
+
+
+message JointDegree{
+    repeated float arm_degree_list = 1;
+    repeated float finger_degree_list = 2;
+}
+
+
+message SensorData {
+    required float elbow = 1;
+    required float shoulder_lift = 2;
+    required float shoulder_pan = 3;
+    required float wrist_1 = 4;
+    required float wrist_2 = 5;
+    required float wrist_3 = 6;
+
+}
+
