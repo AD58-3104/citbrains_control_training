@@ -31,4 +31,9 @@
 *.out
 *.app
 
-/build/
+*.cmake
+CMakeC*
+CMakeFiles/
+Makefile
+build/
+*bin
