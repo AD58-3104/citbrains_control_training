@@ -6,27 +6,6 @@ package UreMessage;
 message JointDegree{
     repeated float arm_degree_list = 1;
     repeated float finger_degree_list = 2;
-    enum FingerNum {
-        palm_finger_1_joint	=1;
-        finger_1_joint_1	=2;
-        finger_1_joint_2	=3;
-        finger_1_joint_3	=4;
-        palm_finger_2_joint	=5;
-        finger_2_joint_1	=6;
-        finger_2_joint_2	=7;
-        finger_2_joint_3	=8;
-        finger_middle_joint_1 = 9;	
-        finger_middle_joint_2 = 10;	
-        finger_middle_joint_3 = 11;
-    }
-    enum ArmNum {
-        shoulder_pan_joint = 0;
-        shoulder_lift_joint = 1;
-        elbow_joint = 2;
-        wrist_1_joint = 3;
-        wrist_2_joint = 4;
-        wrist_3_joint = 5;
-    }
 }
 
 
@@ -37,13 +16,6 @@ message SensorData {
     required float wrist_1 = 4;
     required float wrist_2 = 5;
     required float wrist_3 = 6;
-    enum SensorNum{
-        elbow_joint_sensor = 1;
-        shoulder_lift_joint_sensor = 2;
-        shoulder_pan_joint_sensor = 3;
-        wrist_1_joint_sensor = 4;
-        wrist_2_joint_sensor = 5;
-        wrist_3_joint_sensor = 6;
-    }
+
 }
 
