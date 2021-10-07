@@ -10,12 +10,12 @@ message JointDegree{
 
 
 message SensorData {
-    required float elbow = 1;
-    required float shoulder_lift = 2;
-    required float shoulder_pan = 3;
-    required float wrist_1 = 4;
-    required float wrist_2 = 5;
-    required float wrist_3 = 6;
-
+    // required float elbow = 1;
+    // required float shoulder_lift = 2;
+    // required float shoulder_pan = 3;
+    // required float wrist_1 = 4;
+    // required float wrist_2 = 5;
+    // required float wrist_3 = 6;
+    repeated float sensor_data_list = 1;
 }
 
