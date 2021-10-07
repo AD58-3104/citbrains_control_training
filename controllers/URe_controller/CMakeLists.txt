@@ -17,7 +17,7 @@ endif()
 protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ure.proto)
 link_directories(${WEBOTS_HOME}/lib/controller)
 
-add_executable(URe_controller ure_controller.cpp sUDPSocket.hpp ${PROTO_SRCS} ${PROTO_HDRS})
+add_executable(URe_controller ure_controller.cpp ure_controller_constants.h sUDPSocket.hpp ${PROTO_SRCS} ${PROTO_HDRS})
 target_compile_features(URe_controller  PUBLIC cxx_std_17)
 target_compile_options(URe_controller  PUBLIC -Wall -pedantic-errors) 
 target_include_directories(URe_controller PRIVATE

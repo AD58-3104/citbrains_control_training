@@ -1,9 +1,9 @@
-
-
+#ifndef URE_CONSTANTS_H
+#define URE_CONSTANTS_H
 namespace UreController_constants
 {
 
-    enum FingerNum //TODO この辺ヘッダにして共通の場所に置いておくべき
+    enum class FingerNum
     {
         palm_finger_1_joint = 0,
         finger_1_joint_1,
@@ -18,7 +18,7 @@ namespace UreController_constants
         finger_middle_joint_3,
         length
     };
-    enum ArmNum
+    enum class ArmNum
     {
         shoulder_pan_joint = 0,
         shoulder_lift_joint,
@@ -28,7 +28,7 @@ namespace UreController_constants
         wrist_3_joint,
         length
     };
-    enum SensorNum
+    enum class SensorNum
     {
         elbow_joint_sensor = 0,
         shoulder_lift_joint_sensor,
@@ -49,3 +49,4 @@ namespace UreController_constants
     inline static constexpr int32_t DEGREE_RECEIVE_PORT = 7650;
     inline static constexpr int32_t SENSOR_SEND_PORT = 7651;
 }
+#endif

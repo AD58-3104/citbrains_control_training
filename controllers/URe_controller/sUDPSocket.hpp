@@ -1,3 +1,6 @@
+#ifndef sUDPSOCKET_H
+#define sUDPSOCKET_H
+
 #include <iostream>
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
@@ -332,3 +335,5 @@ using namespace std::literals::chrono_literals;
         };
     }
 }
+
+#endif 
