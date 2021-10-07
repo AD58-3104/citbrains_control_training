@@ -53,9 +53,9 @@ public:
         "finger_1_joint_1",
         "finger_2_joint_1",
         "finger_middle_joint_1"};
-    inline static constexpr int32_t RECEIVE_PORT = 7650;
-    inline static constexpr int32_t SEND_PORT = 7651;
-    UreController() : client_("127.0.0.1", SEND_PORT, Citbrains::Udpsocket::SocketMode::unicast_mode)
+    inline static constexpr int32_t DEGREE_RECEIVE_PORT = 7650;
+    inline static constexpr int32_t SENSOR_SEND_PORT = 7651;
+    UreController() : client_("127.0.0.1", SENSOR_SEND_PORT, Citbrains::Udpsocket::SocketMode::unicast_mode)
     {
         std::cout << "-----------constructing now ..............." << std::endl;
         robot_ = new webots::Robot();
@@ -80,24 +80,26 @@ public:
             UreMessage::JointDegree degrees;
             degrees.ParseFromString(s);
             {
-                std::lock_guard lock(step_mutex_);
+                // std::lock_guard lock(step_mutex_);
                 int32_t cnt = 0;
                 for (const auto &deg : degrees.arm_degree_list())
                 {
                     joint_motors_[cnt]->setPosition(deg);
                     ++cnt;
                 }
+                cnt = 0;
                 for (const auto &deg : degrees.finger_degree_list())
                 {
                     finger_motors_[cnt]->setPosition(deg);
                     ++cnt;
                 }
+                printf("degree received !!!!");
                 stepOne();
             }
             return;
         };
         printf("end constructing \n");
-        server_ = std::make_unique<Citbrains::Udpsocket::UDPServer>(RECEIVE_PORT, handler, Citbrains::Udpsocket::SocketMode::unicast_mode);
+        server_ = std::make_unique<Citbrains::Udpsocket::UDPServer>(DEGREE_RECEIVE_PORT, handler, Citbrains::Udpsocket::SocketMode::unicast_mode);
         printf("end2\n");
     }
     ~UreController()
@@ -109,7 +111,7 @@ public:
     void mainLoop()
     {
         printf("into loop......\n");
-        for (int_fast64_t loop_count = 0;true; ++loop_count)
+        for (int_fast64_t loop_count = 0; true; ++loop_count)
         {
             if (loop_count % 10 == 0)
                 printf("loop");
