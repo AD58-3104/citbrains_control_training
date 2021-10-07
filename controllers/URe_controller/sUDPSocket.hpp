@@ -1,6 +1,7 @@
 #include <iostream>
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
+#include <boost/array.hpp>
 #include <thread>
 #include <memory>
 #include <chrono>
@@ -17,7 +18,7 @@ using namespace std::literals::chrono_literals;
 /**/ #define BOOST_VERSION_IS_1_65_OR_LOWER
 #endif //(((BOOST_VERSION / 1000) + ((BOOST_VERSION) % 1000)) >= 165)
 
-namespace Citbrains
+    namespace Citbrains
 {
     namespace Udpsocket
     {
@@ -132,7 +133,7 @@ namespace Citbrains
             // 送信のハンドラ
             void sendHandler(const boost::system::error_code &error, size_t bytes_transferred)
             {
-#ifdef DEBUG
+#ifdef DEBUG_SUDPSOCKET
                 if (error)
                 {
                     std::cout << "send failed: " << error.message() << std::endl; //TODO::どこかに書き込む
@@ -141,7 +142,10 @@ namespace Citbrains
                 {
                     std::cout << "send correct!" << std::endl;
                 }
-#endif //DEBUG
+                static int32_t send_cnt = 0;
+                send_cnt++;
+                std::cout << "send message " << send_cnt << "times" << std::endl;
+#endif //DEBUG_SUDPSOCKET
             }
 
             void terminate()
@@ -175,7 +179,8 @@ namespace Citbrains
             udp::endpoint remote_endpoint_;
             bool terminated_;
             boost::asio::streambuf receive_buff_;
-            static const int32_t buffer_size_ = 1024;
+            inline static constexpr int32_t buffer_size_ = 1024;
+            // boost::array<char, buffer_size_> receive_buff_;
             int32_t port_;
             std::function<void(std::string &&s)> receivedHandler_;
             std::unique_ptr<std::thread> server_thread_;
@@ -194,7 +199,7 @@ namespace Citbrains
             * @param (func) 受け取ったデータ(文字列)を処理する為の関数オブジェクト
             * @detail 第二引数の関数オブジェクトはstd::stringの右辺値参照を取る。呼び出した時点から受信待機を行う。
             */
-            UDPServer(int32_t port, std::function<void(std::string &&)> func, SocketMode::udpsocketmode_t mode, std::string multicast_address = "224.0.0.169")
+            UDPServer(int32_t port, std::function<void(std::string &&)> func, SocketMode::udpsocketmode_t mode, int32_t handler_work_pararell_num = 1, std::string multicast_address = "224.0.0.169")
                 : io_service_(),
                   socket_(io_service_, udp::endpoint(udp::v4(), port)), terminated_(false), port_(port), receivedHandler_(func),
 #ifdef BOOST_VERSION_IS_HIGHER_THAN_1_65
@@ -216,7 +221,22 @@ namespace Citbrains
                         //TODO:broadcastとunicastは何もない。
                     }
                     server_thread_ = std::make_unique<std::thread>([&]()
-                                                                   { io_service_.run(); });
+                                                                   {
+#ifdef DEBUG_SUDPSOCKET
+                                                                       try
+#endif // DEBUG_SUDPSOCKET
+                                                                       {
+                                                                           io_service_.run();
+                                                                       }
+#ifdef DEBUG_SUDPSOCKET
+                                                                       catch (const std::runtime_error &e)
+                                                                       {
+                                                                        std::cout << "exception catched in sUDPSocket server thread" << std::endl;
+                                                                           std::cout << e.what() << std::endl;
+                                                                       }
+                                                                       std::cout << "server io_service is finished!!!" << std::endl;
+#endif // DEBUG_SUDPSOCKET
+                                                                   });
                 }
                 catch (const std::runtime_error &e)
                 {
@@ -234,17 +254,29 @@ namespace Citbrains
             // 受信開始。コンストラクタで呼ばれる。
             void startReceive()
             {
-                std::this_thread::sleep_for(10ms);
-                if (!terminated_)
-                    socket_.async_receive_from(
-                        receive_buff_.prepare(buffer_size_),
-                        remote_endpoint_,
-                        // boost::bind(&UDPServer::receiveHandler, this,
-                        //             asio::placeholders::error, asio::placeholders::bytes_transferred)
-                        [this](const boost::system::error_code &error, size_t bytes_transferred)
-                        {
-                            receiveHandler(error, bytes_transferred);
-                        });
+#ifdef DEBUG_SUDPSOCKET
+                try
+#endif // DEBUG_SUDPSOCKET
+                {
+                    if (!terminated_)
+                        socket_.async_receive_from(
+                            receive_buff_.prepare(buffer_size_),
+                            // boost::asio::buffer(receive_buff_),
+                            remote_endpoint_,
+                            // boost::bind(&UDPServer::receiveHandler, this,
+                            //             asio::placeholders::error, asio::placeholders::bytes_transferred)
+                            [this](const boost::system::error_code &error, size_t bytes_transferred)
+                            {
+                                receiveHandler(error, bytes_transferred);
+                            });
+                }
+#ifdef DEBUG_SUDPSOCKET
+                catch (const std::runtime_error &e)
+                {
+                    std::cout << "exception catched in reiceve" << std::endl;
+                    std::cout << e.what() << std::endl;
+                }
+#endif // DEBUG_SUDPSOCKET
             }
 
             // 受信のハンドラ。データを受け取った時に呼ばれる。
@@ -252,16 +284,16 @@ namespace Citbrains
             {
                 if (error && error != boost::asio::error::eof)
                 {
-#ifdef DEBUG
+#ifdef DEBUG_SUDPSOCKET
                     std::cout << "receive failed: " << error.message() << std::endl;
 #endif
                 }
                 else
                 {
+                    // std::string data(receive_buff_.data(), bytes_transferred);
                     std::string data(boost::asio::buffer_cast<const char *>(receive_buff_.data()), bytes_transferred);
-#ifdef DEBUG
-                    std::cout << "length::" << bytes_transferred << " " << std::endl;
-                    std::cout << data;
+#ifdef DEBUG_SUDPSOCKET
+                    std::cout << "length::" << bytes_transferred << " row data is ==" << data << std::endl;
 #endif
                     receivedHandler_(std::move(data));
                     receive_buff_.consume(receive_buff_.size());

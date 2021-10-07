@@ -141,13 +141,14 @@ private:
                 joint_motors_[cnt]->setPosition(deg);
                 ++cnt;
             }
+            cnt = 0;
             for (const auto &deg : degrees.finger_degree_list())
             {
                 finger_motors_[cnt]->setPosition(deg);
                 ++cnt;
             }
             printf("degree received !!!!");
-            // stepOne();
+            stepOne();
         }
         return;
     }
@@ -155,6 +156,7 @@ private:
     {
         //TODO sensorの値のやつ書く
         // printf("step\n");
+        std::lock_guard lock(step_mutex_);
         robot_->step(timestep_);
     }
 };
