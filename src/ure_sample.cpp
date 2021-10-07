@@ -59,12 +59,12 @@ int main(int argc, char const *argv[])
         return deg / 180 * 3.1415926;
     };
     std::cout << "start" << std::endl;
-    for (int_fast64_t loop = 0; loop < 10000; loop++)
+    for (int_fast64_t loop = 0; loop < 100; loop++)
     {
         UreMessage::JointDegree deg;
         for (size_t i = 0; i < joint_name_list.size(); ++i)
         {
-            deg.add_arm_degree_list(to_rad( -(loop % 30)));
+            deg.add_arm_degree_list(to_rad(-(loop % 30)));
         }
         for (size_t i = 0; i < finger_name_list.size(); ++i)
         {
@@ -73,5 +73,34 @@ int main(int argc, char const *argv[])
         client.send(std::move(deg.SerializeAsString()));
         std::this_thread::sleep_for(32ms);
     }
+    int cnt = 0;
+    int plus = -1;
+    for (int_fast64_t j = 0;; ++j)
+    {
+        UreMessage::JointDegree deg;
+        if ((cnt == 0) || (cnt == 360))
+        {
+            plus *= -1;
+        }
+        cnt += plus;
+        for (size_t i = 0; i < joint_name_list.size(); ++i)
+        {
+            if (i == 0)
+            {
+                deg.add_arm_degree_list(to_rad(cnt));
+            }
+            else
+            {
+                deg.add_arm_degree_list(to_rad(-30));
+            }
+        }
+        for (size_t i = 0; i < finger_name_list.size(); ++i)
+        {
+            deg.add_finger_degree_list(to_rad(0));
+        }
+        client.send(std::move(deg.SerializeAsString()));
+        std::this_thread::sleep_for(32ms);
+    }
+
     return 0;
 }

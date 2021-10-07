@@ -75,12 +75,12 @@ public:
         // }
         auto handler = [this](std::string &&data)
         {
-            printf("-------------------received !!--------------------");
+            // printf("-------------------received !!--------------------");
             std::string s(std::move(data));
             UreMessage::JointDegree degrees;
             degrees.ParseFromString(s);
             {
-                // std::lock_guard lock(step_mutex_);
+                std::lock_guard lock(step_mutex_);
                 int32_t cnt = 0;
                 for (const auto &deg : degrees.arm_degree_list())
                 {
@@ -93,8 +93,8 @@ public:
                     finger_motors_[cnt]->setPosition(deg);
                     ++cnt;
                 }
-                printf("degree received !!!!");
-                stepOne();
+                // printf("degree received !!!!");
+                robot_->step(timestep_);
             }
             return;
         };
@@ -113,8 +113,8 @@ public:
         printf("into loop......\n");
         for (int_fast64_t loop_count = 0; true; ++loop_count)
         {
-            if (loop_count % 10 == 0)
-                printf("loop");
+            // if (loop_count % 10 == 0)
+            //     printf("loop");
             // std::lock_guard lock(step_mutex_);
             stepOne();
         }
@@ -149,7 +149,7 @@ private:
                 finger_motors_[cnt]->setPosition(deg);
                 ++cnt;
             }
-            printf("degree received !!!!");
+            // printf("degree received !!!!");
             stepOne();
         }
         return;
@@ -158,8 +158,8 @@ private:
     {
         //TODO sensorの値のやつ書く
         // printf("step\n");
-        std::lock_guard lock(step_mutex_);
-        robot_->step(timestep_);
+        // std::lock_guard lock(step_mutex_);
+        // robot_->step(timestep_);
     }
 };
 
