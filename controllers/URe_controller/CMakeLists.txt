@@ -17,16 +17,23 @@ endif()
 protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ure.proto)
 link_directories(${WEBOTS_HOME}/lib/controller)
 
-add_executable(URe_controller ure_controller.cpp ure_controller_constants.h sUDPSocket.hpp ${PROTO_SRCS} ${PROTO_HDRS})
-target_compile_features(URe_controller  PUBLIC cxx_std_17)
-target_compile_options(URe_controller  PUBLIC -Wall -pedantic-errors) 
-target_include_directories(URe_controller PRIVATE
-${WEBOTS_HOME}/include/controller/c 
-${WEBOTS_HOME}/include/controller/cpp 
-${Protobuf_INCLUDE_DIRS}
-${CMAKE_CURRENT_BINARY_DIR}
-${Boost_INCLUDE_DIRS}
-)
+# add_executable(URe_controller ure_controller.cpp ure_controller_constants.h sUDPSocket.hpp ${PROTO_SRCS} ${PROTO_HDRS})
+add_executable(URe_controller ure_controllers.hpp ure_controller_constants.h main.cpp)
+
+list(APPEND target_list URe_controller )
+
+foreach(itm ${target_list})
+    target_compile_features(${itm}  PUBLIC cxx_std_17)
+    target_compile_options(${itm}  PUBLIC -Wall -pedantic-errors) 
+    target_include_directories(${itm} PRIVATE
+        ${WEBOTS_HOME}/include/controller/c 
+        ${WEBOTS_HOME}/include/controller/cpp 
+        ${Protobuf_INCLUDE_DIRS}
+        ${CMAKE_CURRENT_BINARY_DIR}
+        ${Boost_INCLUDE_DIRS}
+    )   
+endforeach()
+
 
 set (WEBOTS_LIBRARIES ${CMAKE_SHARED_LIBRARY_PREFIX}Controller${CMAKE_SHARED_LIBRARY_SUFFIX} ${CMAKE_SHARED_LIBRARY_PREFIX}CppController${CMAKE_SHARED_LIBRARY_SUFFIX})
 target_link_libraries(URe_controller 
@@ -34,6 +41,6 @@ target_link_libraries(URe_controller
     ${WEBOTS_LIBRARIES}
     -lrt 
     protobuf::libprotobuf
-    )
+)
 
 install(TARGETS URe_controller DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})

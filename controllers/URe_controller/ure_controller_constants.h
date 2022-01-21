@@ -39,9 +39,19 @@ namespace UreController_constants
         length
     };
     const std::vector<std::string> joint_name_list{
-        "shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"};
+        "shoulder_pan_joint",
+        "shoulder_lift_joint",
+        "elbow_joint",
+        "wrist_1_joint",
+        "wrist_2_joint",
+        "wrist_3_joint"};
     const std::vector<std::string> sensor_name_list{
-        "shoulder_pan_joint_sensor", "shoulder_lift_joint_sensor", "elbow_joint_sensor", "wrist_1_joint_sensor", "wrist_2_joint_sensor", "wrist_3_joint_sensor"};
+        "shoulder_pan_joint_sensor",
+        "shoulder_lift_joint_sensor",
+        "elbow_joint_sensor",
+        "wrist_1_joint_sensor",
+        "wrist_2_joint_sensor",
+        "wrist_3_joint_sensor"};
     const std::vector<std::string> finger_name_list{
         "finger_1_joint_1",
         "finger_2_joint_1",
