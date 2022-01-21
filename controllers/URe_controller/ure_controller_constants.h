@@ -1,5 +1,20 @@
 #ifndef URE_CONSTANTS_H
 #define URE_CONSTANTS_H
+
+/* ur10e's dimention
+
+https://www.universal-robots.com/media/1810584/05_2021_10e_factsheet_jp.pdf
+
+plane to base x = + 0mm, z = 0mm
+base to first link x = + 176mm, z = + 181mm
+first to second link x = + 0, z = + 613mm
+second to third link x = - 137mm, z = + 571mm
+thrid to wrist 1 x = + 135mm, z = + 0mm
+wrist 1 to wrist 2 x = + 0mm,z = + 120mm
+wrist 2 to wrist 3 x = + 117mm, z = + 0mm
+*/
+
+
 namespace UreController_constants
 {
 
